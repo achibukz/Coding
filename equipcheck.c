@@ -209,7 +209,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
         }
 
         /*
-        Crit Rate Check and Damage Formula test2 test 3 commit
+        Crit Rate Check and Damage Formula
         */
         nP1CrChck = rand() % 100 + 1;
         nP2CrChck = rand() % 100 + 1;
@@ -236,7 +236,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
         }
 
         /*
-        Start of Action test
+        Start of Action
         */
         if(nP1Action == 3 && nP2Action == 3){
             
