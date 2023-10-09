@@ -161,6 +161,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
     srand(time(NULL));
     int ntie = 0;
 
+    // lmao
     while(*nP1hp <= 0 || *nP2hp <= 0 || ntie != 1){
         int nP1Action, nP2Action;
         int nP1Dmg, nP2Dmg, nP1Blck, nP2Blck, nP1Chrg, nP2Chrg; 
