@@ -236,7 +236,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
         }
 
         /*
-        Start of Action
+        Start of Action test
         */
         if(nP1Action == 3 && nP2Action == 3){
             
