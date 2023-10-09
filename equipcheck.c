@@ -239,6 +239,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
         Start of Action
         */
         if(nP1Action == 3 && nP2Action == 3){
+            printf("Both have blocked each other");
+            printf("You have received 0 damage.");
+            printf("The opponent have received 0 damage.");
+        }
+        else if(){
             
         }
 
