@@ -18,6 +18,7 @@ Abram Aki R. Bukuhan, DLSU ID# 12313467
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include<string.h>
 
 void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , int* nP2hp, int* nP2atk, int* nP2def, int* nP2spd,int* nP2Cr){
     srand(time(NULL));
@@ -206,7 +207,7 @@ void EquipPickPhase(){
     printf("\n\nYou chose %s and %s.", cP1Weapon, cP1Equip);
     printf("\nThe Opponent chose %s and %s.\n", cP2Weapon, cP2Equip);
     printf("Both of you have equipped your weapons of choice. Opening Battle Phase........");
-    BattlePhase(nP1hp, nP1atk, nP1def, nP1spd, nP1Cr, nP2hp, nP2atk, nP2def, nP2spd, nP2Cr);
+    BattlePhase(&nP1hp, &nP1atk, &nP1def, &nP1spd, &nP1Cr, &nP2hp, &nP2atk, &nP2def, &nP2spd, &nP2Cr);
  
 }
 
