@@ -3,7 +3,9 @@
 #include <time.h>
 #include<string.h>
 
-int EquipPhase(){
+void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , int* nP2hp, int* nP2atk, int* nP2def, int* nP2spd,int* nP2Cr);
+
+void EquipPhase(){
 
     srand(time(NULL));
 
