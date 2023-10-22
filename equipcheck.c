@@ -187,7 +187,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             *nP1atk *= 2;
             *nP1spd *= 2;
         }
-        else if(nP2Action == 2){
+        if(nP2Action == 2){
             *nP2atk *= 2;
             *nP2spd *= 2;
         }
@@ -195,7 +195,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
         if(nP1Action == 3){
             *nP1def *= 2;
         }
-        else if(nP2Action == 3){
+        if(nP2Action == 3){
             *nP2def *= 2;
         }
 
@@ -260,6 +260,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 nP2Blck = 1;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
             }
             else if(nP1CritHit == 1){
@@ -271,6 +272,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 nP2Blck = 1;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
             }
         }
@@ -283,6 +285,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 nP1Blck = 1;
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(nP2CritHit == 1){
@@ -294,6 +297,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 nP1Blck = 1;
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
         }
@@ -311,9 +315,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 *nP1hp -= nP2Dmg;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd > *nP2spd && nP1CritHit == 1 && nP2CritHit == 0){
@@ -330,9 +336,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 *nP1hp -= nP2Dmg;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd > *nP2spd && nP1CritHit == 0 && nP2CritHit == 1){   
@@ -349,9 +357,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 *nP1hp -= nP2Dmg;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd > *nP2spd && nP1CritHit == 1 && nP2CritHit == 1){
@@ -368,9 +378,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 *nP1hp -= nP2Dmg;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd < *nP2spd && nP1CritHit == 0 && nP2CritHit == 0){
@@ -386,9 +398,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 *nP2hp -= nP1Dmg;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd < *nP2spd && nP1CritHit == 1 && nP2CritHit == 0){
@@ -405,9 +419,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 *nP2hp -= nP1Dmg;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd < *nP2spd && nP1CritHit == 0 && nP2CritHit == 1){
@@ -424,9 +440,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 *nP2hp -= nP1Dmg;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd < *nP2spd && nP1CritHit == 1 && nP2CritHit == 1){
@@ -444,9 +462,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 *nP2hp -= nP1Dmg;
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd == *nP2spd && nP1CritHit == 0 && nP2CritHit == 0){
@@ -463,9 +483,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 }
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd == *nP2spd && nP1CritHit == 1 && nP2CritHit == 0){
@@ -483,9 +505,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 }
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd == *nP2spd && nP1CritHit == 0 && nP2CritHit == 1){
@@ -503,9 +527,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 }
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
             else if(*nP1spd == *nP2spd && nP1CritHit == 1 && nP2CritHit == 1){
@@ -523,9 +549,11 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 }
                 if (nP1Chrg == 1){
                     nP1ChrgEnd = 1;
+                    nP1Chrg = 0;
                 }
                 if (nP2Chrg == 1){
                     nP2ChrgEnd = 1;
+                    nP2Chrg = 0;
                 }
             }
         }
@@ -542,7 +570,8 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             printf("You dealt %d damage to the opponent.\n", nP1Dmg);
             *nP2hp -= nP1Dmg;
 
-            if(nP2hp == 0){
+            if(*nP1hp == 0){
+                printf("You win!\n");
                 break;
             }
 
@@ -551,6 +580,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
 
             if(nP1Chrg == 1){
                 nP1ChrgEnd = 1;
+                nP1Chrg = 0;
             }
         }
         else if(nP1Action == 2 && nP2Action == 1){
@@ -561,7 +591,8 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             printf("The opponent dealt %d damage to you.\n", nP2Dmg);
             *nP1hp -= nP2Dmg;
 
-            if(nP1hp == 0){
+            if(*nP1hp == 0){
+                printf("You lose!\n");
                 break;
             }
 
@@ -570,17 +601,18 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
 
             if(nP2Chrg == 1){
                 nP2ChrgEnd = 1;
+                nP2Chrg = 0;
             }
         }
 
         /*
         Reset All Stats
         */
-        if(nP1Chrg == 1 && nP1ChrgEnd == 1){
+        if(nP1ChrgEnd == 1){
             *nP1atk /= 2;
             *nP1spd /= 2;
         }
-        else if(nP2Chrg == 1 && nP2ChrgEnd == 1){
+        if(nP2ChrgEnd == 1){
             *nP2atk /= 2;
             *nP2spd /= 2;
         }
@@ -588,7 +620,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
         if(nP1Blck == 1){
             *nP1def /= 2;
         }
-        else if(nP2Blck == 1){
+        if(nP2Blck == 1){
             *nP2def /= 2;
         }
 
