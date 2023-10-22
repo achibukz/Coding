@@ -27,7 +27,7 @@ void EquipPhase(){
     // int nWRand = rand() % 4 + 1;
     // int nERand = rand() % 4 + 1;
     int nWRand = 3;
-    int nERand = 1;
+    int nERand = 3;
 
     printf("Welcome to the Equipment Picking Phase.\n You and your Opponent will pick ONE Weapon and ONE Armor each before the Battle Phase.\n Choose your weapons wisely. ");
     printf("Press the Number of your desired weapon of choice.");
@@ -167,16 +167,12 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
     // lmao
     while(*nP1hp >= 0 || *nP2hp >= 0 || ntie == 1){
         int nP1Action, nP2Action;
-        int nP1Dmg, nP2Dmg, nP1Blck, nP2Blck, nP1Chrg, nP2Chrg; 
+        int nP1Dmg, nP2Dmg, nP1Blck, nP2Blck, nP1Chrg, nP2Chrg, nP1ChrgEnd, nP2ChrgEnd; 
         int nP1CrChck, nP2CrChck, nP1CritHit, nP2CritHit;
 
-        nP1Chrg = 0;
-        nP2Chrg = 0;
-        nP1Blck = 0;
-        nP2Blck = 0;
 
         // removed random muna to check attack
-        nP2Action = 1;
+        nP2Action = rand() % 3 + 1;
 
         printf("What Action will you choose?\n");
         printf("1: Attack\n");
@@ -243,6 +239,18 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             nP1Blck = 1;
             nP2Blck = 1;
         }
+        else if(nP1Action == 2 && nP2Action == 3){
+            printf("The opponent blocked the attack.\n");
+            printf("You dealt 0 damage to the oppopnent.\n");
+            printf("You charged for the next turn.\n");
+            nP1Chrg = 1;
+        }
+        else if(nP1Action == 3 && nP2Action == 2){
+            printf("You blocked the attack.\n");
+            printf("The opponent dealt 0 damage to you.\n");
+            printf("The opponent charged for the next turn.\n");
+            nP2Chrg = 1;
+        }
         else if(nP1Action == 1 && nP2Action == 3){
             if(nP1CritHit == 0){
                 printf("The opponent blocked the attack.\n");
@@ -250,6 +258,9 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
                 nP2Blck = 1;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
             }
             else if(nP1CritHit == 1){
                 printf("The opponent blocked the attack.\n");
@@ -258,6 +269,9 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
                 nP2Blck = 1;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
             }
         }
         else if(nP1Action == 3 && nP2Action == 1){
@@ -267,6 +281,9 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
                 nP1Blck = 1;
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
             else if(nP2CritHit == 1){
                 printf("You blocked the attack.\n");
@@ -275,6 +292,9 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
                 nP1Blck = 1;
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
         }
         else if(nP1Action == 1 && nP2Action == 1){
@@ -283,11 +303,18 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
                 if(*nP2hp == 0){
+                    printf("You win!");
                     break;
                 }
                 printf("The opponent attacked you!\n");
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
             else if(*nP1spd > *nP2spd && nP1CritHit == 1 && nP2CritHit == 0){
                 printf("You attacked first!\n");
@@ -295,23 +322,37 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
                 if(*nP2hp == 0){
+                    printf("You win!");
                     break;
                 }
                 printf("The opponent attacked you!\n");
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
-            else if(*nP1spd > *nP2spd && nP1CritHit == 0 && nP2CritHit == 1){
+            else if(*nP1spd > *nP2spd && nP1CritHit == 0 && nP2CritHit == 1){   
                 printf("You attacked first!\n");
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
                 if(*nP2hp == 0){
+                    printf("You win!");
                     break;
                 }
                 printf("The opponent attacked you!\n");
                 printf("The opponent landed a critical hit!\n");
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
             else if(*nP1spd > *nP2spd && nP1CritHit == 1 && nP2CritHit == 1){
                 printf("You attacked first!\n");
@@ -319,34 +360,55 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
                 if(*nP2hp == 0){
+                    printf("You win!");
                     break;
                 }
                 printf("The opponent attacked you!\n");
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
             else if(*nP1spd < *nP2spd && nP1CritHit == 0 && nP2CritHit == 0){
                 printf("They attacked first!\n");
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
                 if(*nP2hp == 0){
+                    printf("You win!");
                     break;
                 }
                 printf("You attacked the opponent!\n");
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
             else if(*nP1spd < *nP2spd && nP1CritHit == 1 && nP2CritHit == 0){
                 printf("They attacked first!\n");
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
                 if(*nP1hp == 0){
+                    printf("You lose!");
                     break;
                 }
                 printf("You attacked the opponent!\n");
                 printf("You landed a critical hit!\n");
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
             else if(*nP1spd < *nP2spd && nP1CritHit == 0 && nP2CritHit == 1){
                 printf("They attacked first!\n");
@@ -354,11 +416,18 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
                 if(*nP1hp == 0){
+                    printf("You lose!");
                     break;
                 }
                 printf("You attacked the opponent!\n");
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
             else if(*nP1spd < *nP2spd && nP1CritHit == 1 && nP2CritHit == 1){
                 printf("They attacked first!\n");
@@ -366,12 +435,19 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
                 if(*nP1hp == 0){
+                    printf("You lose!");
                     break;
                 }
                 printf("You attacked the opponent!\n");
                 printf("You landed a critical hit!\n");
                 printf("You dealt %d damage to the opponent.\n", nP1Dmg);
                 *nP2hp -= nP1Dmg;
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
             else if(*nP1spd == *nP2spd && nP1CritHit == 0 && nP2CritHit == 0){
                 printf("Both attacked at the same time!\n");
@@ -384,6 +460,12 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 }
                 else{
                     ntie = 0;
+                }
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
                 }
             }
             else if(*nP1spd == *nP2spd && nP1CritHit == 1 && nP2CritHit == 0){
@@ -399,6 +481,12 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 else{
                     ntie = 0;
                 }
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
             else if(*nP1spd == *nP2spd && nP1CritHit == 0 && nP2CritHit == 1){
                 printf("Both attacked at the same time!\n");
@@ -412,6 +500,12 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 }
                 else{
                     ntie = 0;
+                }
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
                 }
             }
             else if(*nP1spd == *nP2spd && nP1CritHit == 1 && nP2CritHit == 1){
@@ -427,26 +521,66 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 else{
                     ntie = 0;
                 }
+                if (nP1Chrg == 1){
+                    nP1ChrgEnd = 1;
+                }
+                if (nP2Chrg == 1){
+                    nP2ChrgEnd = 1;
+                }
             }
         }
         else if(nP1Action == 2 && nP2Action == 2){
-
+            printf("Both charged for the next turn!\n");
+            nP1Chrg = 1;
+            nP2Chrg = 1;
         }
         else if(nP1Action == 1 && nP2Action == 2){
-            
+            printf("You attacked the opponent!\n");
+            if(nP1CritHit == 1){
+                printf("You landed a critical hit!\n");
+            }
+            printf("You dealt %d damage to the opponent.\n", nP1Dmg);
+            *nP2hp -= nP1Dmg;
+
+            if(nP2hp == 0){
+                break;
+            }
+
+            printf("The opponent charged for the next turn.\n");
+            nP2Chrg = 1;
+
+            if(nP1Chrg == 1){
+                nP1ChrgEnd = 1;
+            }
         }
         else if(nP1Action == 2 && nP2Action == 1){
-            
+            printf("The opponent attacked you!\n");
+            if(nP2CritHit == 1){
+                printf("The opponent landed a critical hit!\n");
+            }
+            printf("The opponent dealt %d damage to you.\n", nP2Dmg);
+            *nP1hp -= nP2Dmg;
+
+            if(nP1hp == 0){
+                break;
+            }
+
+            printf("You charged for the next turn.\n");
+            nP1Chrg = 1;
+
+            if(nP2Chrg == 1){
+                nP2ChrgEnd = 1;
+            }
         }
 
         /*
         Reset All Stats
         */
-        if(nP1Chrg == 1){
+        if(nP1Chrg == 1 && nP1ChrgEnd == 1){
             *nP1atk /= 2;
             *nP1spd /= 2;
         }
-        else if(nP2Chrg == 1){
+        else if(nP2Chrg == 1 && nP2ChrgEnd == 1){
             *nP2atk /= 2;
             *nP2spd /= 2;
         }
