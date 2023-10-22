@@ -171,6 +171,9 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
         int nP1CrChck, nP2CrChck, nP1CritHit, nP2CritHit;
 
 
+        nP1ChrgEnd = 0;
+        nP2ChrgEnd = 0;
+
         // removed random muna to check attack
         nP2Action = rand() % 3 + 1;
 
@@ -244,12 +247,14 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             printf("You dealt 0 damage to the oppopnent.\n");
             printf("You charged for the next turn.\n");
             nP1Chrg = 1;
+            nP2Blck = 1;
         }
         else if(nP1Action == 3 && nP2Action == 2){
             printf("You blocked the attack.\n");
             printf("The opponent dealt 0 damage to you.\n");
             printf("The opponent charged for the next turn.\n");
             nP2Chrg = 1;
+            nP1Blck = 1;
         }
         else if(nP1Action == 1 && nP2Action == 3){
             if(nP1CritHit == 0){
