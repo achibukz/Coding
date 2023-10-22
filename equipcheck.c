@@ -23,11 +23,11 @@ void EquipPhase(){
 
     char cP1Weapon[20], cP1Equip[20], cP2Weapon[20], cP2Equip[20];
     int nWCase, nECase;
-    // change for checking
-    // int nWRand = rand() % 4 + 1;
-    // int nERand = rand() % 4 + 1;
-    int nWRand = 3;
-    int nERand = 3;
+
+    int nWRand = rand() % 4 + 1;
+    int nERand = rand() % 4 + 1;
+    int nChecker2 = 1;
+    int nChecker3 = 1;
 
     printf("Welcome to the Equipment Picking Phase.\n You and your Opponent will pick ONE Weapon and ONE Armor each before the Battle Phase.\n Choose your weapons wisely. ");
     printf("Press the Number of your desired weapon of choice.");
@@ -36,68 +36,93 @@ void EquipPhase(){
     printf("2: Katana = ATK +20\n");
     printf("3: Broad Sword = ATK +40, SPD -5\n");
     printf("4: Fist (No Weapon) = SPD +10\n\n");
-    printf("What is your choice? ");
-    scanf("%d", &nWCase);
+    
+    while(nChecker2 != 0){
+        printf("What is your choice? ");
+        scanf("%d", &nWCase);
 
-    switch(nWCase){
-        case 1:
-            nP1atk = nP1atk + 15;
-            nP1spd = nP1spd + 3;
-            printf("You have chosen 'Dagger'.");
-            strcpy(cP1Weapon, "Dagger");
-            break;
-        case 2:
-            nP1atk = nP1atk + 20;
-            printf("You have chosen 'Katana'.");
-            strcpy(cP1Weapon, "Katana");
-            break;
-        case 3:
-            nP1atk = nP1atk + 40;
-            nP1spd = nP1spd - 5;
-            printf("You have chosen 'Broad Sword'.");
-            strcpy(cP1Weapon, "Broad Sword");
-            break;
-        case 4:
-            nP1spd = nP1spd + 10;
-            printf("You have chosen 'Fist(No Weapon)'.");
-            strcpy(cP1Weapon, "Fist (No Weapon)");
-            break;
+        switch(nWCase){
+            case 1:
+                nP1atk = nP1atk + 15;
+                nP1spd = nP1spd + 3;
+                printf("You have chosen 'Dagger'.");
+                strcpy(cP1Weapon, "Dagger");
+                nChecker2 = 0;
+                break;
+            case 2:
+                nP1atk = nP1atk + 20;
+                printf("You have chosen 'Katana'.");
+                strcpy(cP1Weapon, "Katana");
+                nChecker2 = 0;
+                break;
+            case 3:
+                nP1atk = nP1atk + 40;
+                nP1spd = nP1spd - 5;
+                printf("You have chosen 'Broad Sword'.");
+                strcpy(cP1Weapon, "Broad Sword");
+                nChecker2 = 0;
+                break;
+            case 4:
+                nP1spd = nP1spd + 10;
+                printf("You have chosen 'Fist(No Weapon)'.");
+                strcpy(cP1Weapon, "Fist (No Weapon)");
+                nChecker2 = 0;
+                break;
+            default:
+                printf("Invalid Input. Try again please.\n");
+        }
     }
+    
+
+    
 
     printf("\n\nEquipments: \n\n");
     printf("1: Mythril = DEF +3, SPD +3\n");
     printf("2: Chain Mail = DEF +8, HP +5\n");
     printf("3: Adamantite Armor = DEF +18, HP +10, SPD -4\n");
     printf("4: Bare (No Armor) = SPD +10\n\n");
-    printf("What is your choice? ");
-    scanf("%d", &nECase);
+    
+    
+    while(nChecker3 != 0){
+        printf("What is your choice? ");
+        scanf("%d", &nECase);
 
-    switch(nECase){
-        case 1:
-            nP1def = nP1def + 3;
-            nP1spd = nP1spd + 3;
-            printf("You have chosen 'Mythril'.");
-            strcpy(cP1Equip, "Mythril");
-            break;
-        case 2:
-            nP1def = nP1def + 8;
-            nP1hp = nP1hp +5;
-            printf("You have chosen 'Chain Mail'.");
-            strcpy(cP1Equip, "Chain Mail");
-            break;
-        case 3:
-            nP1def = nP1def + 18;
-            nP1hp = nP1hp + 10;
-            nP1spd = nP1spd - 4;
-            printf("You have chosen 'Adamantite Armor'.");
-            strcpy(cP1Equip, "Adamantite Armor");
-            break;
-        case 4:
-            nP1spd = nP1spd + 10;
-            printf("You have chosen 'Bare(No Armor)'.");
-            strcpy(cP1Equip, "Bare (No Armor)");
-            break;
+        switch(nECase){
+            case 1:
+                nP1def = nP1def + 3;
+                nP1spd = nP1spd + 3;
+                printf("You have chosen 'Mythril'.");
+                strcpy(cP1Equip, "Mythril");
+                nChecker3 = 0;
+                break;
+            case 2:
+                nP1def = nP1def + 8;
+                nP1hp = nP1hp +5;
+                printf("You have chosen 'Chain Mail'.");
+                strcpy(cP1Equip, "Chain Mail");
+                nChecker3 = 0;
+                break;
+            case 3:
+                nP1def = nP1def + 18;
+                nP1hp = nP1hp + 10;
+                nP1spd = nP1spd - 4;
+                printf("You have chosen 'Adamantite Armor'.");
+                strcpy(cP1Equip, "Adamantite Armor");
+                nChecker3 = 0;
+                break;
+            case 4:
+                nP1spd = nP1spd + 10;
+                printf("You have chosen 'Bare(No Armor)'.");
+                strcpy(cP1Equip, "Bare (No Armor)");
+                nChecker3 = 0;
+                break;
+            default:
+                printf("Invalid Input. Try again please.\n");
+        }
     }
+    
+
+    
 
     switch(nWRand){
         case 1:
@@ -171,20 +196,38 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
     // lmao
 
     while(*nP1hp >= 0 || *nP2hp >= 0 || ntie == 1){
-        int nP1Action, nP2Action;
+        int nP1Action, nP2Action, nChecker1;
         int nP1Dmg, nP2Dmg, nP1ChrgEnd, nP2ChrgEnd; 
         int nP1CrChck, nP2CrChck, nP1CritHit, nP2CritHit;
 
+        nChecker1 = 1;
         nP1ChrgEnd = 0;
         nP2ChrgEnd = 0;
 
         nP2Action = rand() % 3 + 1;
 
-        printf("What Action will you choose?\n");
-        printf("1: Attack\n");
-        printf("2: Charge\n");
-        printf("3: Block\nAction: ");
-        scanf("%d", &nP1Action);
+        while(nChecker1 != 0){
+            printf("What Action will you choose?\n");
+            printf("1: Attack\n");
+            printf("2: Charge\n");
+            printf("3: Block\nAction: ");
+            scanf("%d", &nP1Action);
+
+            switch(nP1Action){
+                case 1:
+                    nChecker1 = 0;
+                    break;
+                case 2:
+                    nChecker1 = 0;
+                    break;
+                case 3:
+                    nChecker1 = 0;
+                    break;
+                default:
+                    printf("Invalid Input. Try again please.\n");
+            }
+        }
+        
 
         /*
         Stat Changes from the Actions
