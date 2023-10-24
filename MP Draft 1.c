@@ -11,7 +11,7 @@ Abram Aki R. Bukuhan, DLSU ID# 12313467
     Description:
     Programmed by: Abram Aki R. Bukuhan
     Last modified: October 22, 2023
-    Version: 0.2
+    Version: 1.0
     [Acknowledgements: ]
 */
 
