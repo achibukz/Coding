@@ -426,7 +426,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
                 }
                 printf("They dealt %d damage to you.\n", nP2Dmg);
                 *nP1hp -= nP2Dmg;
-                if(*nP2hp == 0){
+                if(*nP1hp == 0){
                     printf("You win!");
                     break;
                 }
