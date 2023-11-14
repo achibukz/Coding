@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+
 void deposit(float amt, float* bal){
     *bal += amt;
 }

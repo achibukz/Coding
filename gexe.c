@@ -90,7 +90,7 @@ void displayMenu(float *fMoney, int *nExit){
     
 }
   
-int main(){
+int main(){     
     int nExit;
     float fMoney;
 
