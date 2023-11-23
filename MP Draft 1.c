@@ -10,23 +10,26 @@ Abram Aki R. Bukuhan, DLSU ID# 12313467
 /*
     Description:
     Programmed by: Abram Aki R. Bukuhan
-    Last modified: October 22, 2023
-    Version: 1.0
+    Last modified: Novemver 23, 2023
+    Version: 1.5
     [Acknowledgements: ]
 */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include<string.h>
+#include <stdlib.h> //rand and srand
+#include <time.h> // time(NULL) for srand (To make it different every iteration)
+#include<string.h> // strcpy
 
-void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , int* nP2hp, int* nP2atk, int* nP2def, int* nP2spd,int* nP2Cr);
+/*
+    (EDIT)
+*/
+void battlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , int* nP2hp, int* nP2atk, int* nP2def, int* nP2spd,int* nP2Cr);
 
 /*
     This Function changes the values of each stat of each player. It also
     ignores the Equipment Picking Phase and goes straight to the Battle Phase.
 */
-void DevMode(){
+void devMode(){
     int nP1hp, nP1atk, nP1def, nP1spd, nP1Cr;
     int nP2hp, nP2atk, nP2def, nP2spd, nP2Cr;
 
@@ -55,8 +58,8 @@ void DevMode(){
     printf("Opponent's Crit Rate: ");
     scanf("%d", &nP2Cr);
 
-    printf("You have finished setting up your stats. Opening Battle Phase........");
-    BattlePhase(&nP1hp, &nP1atk, &nP1def, &nP1spd, &nP1Cr, &nP2hp, &nP2atk, &nP2def, &nP2spd, &nP2Cr);
+    printf("You have finished setting up your stats. Opening Battle Phase........\n");
+    battlePhase(&nP1hp, &nP1atk, &nP1def, &nP1spd, &nP1Cr, &nP2hp, &nP2atk, &nP2def, &nP2spd, &nP2Cr);
 }
 
 /*
@@ -64,7 +67,7 @@ void DevMode(){
     they want to use for the battle. It also lets the opponent randomly
     pick what Weapon and Equipment they will use too.
 */
-void EquipPhase(){
+void equipPhase(){
 
     srand(time(NULL));
 
@@ -228,9 +231,12 @@ void EquipPhase(){
     printf("\n\nYou chose %s and %s.", cP1Weapon, cP1Equip);
     printf("\nThe Opponent chose %s and %s.\n\n", cP2Weapon, cP2Equip);
     printf("Both of you have equipped your weapons of choice. Opening Battle Phase........\n");
-    BattlePhase(&nP1hp, &nP1atk, &nP1def, &nP1spd, &nP1Cr, &nP2hp, &nP2atk, &nP2def, &nP2spd, &nP2Cr);
+    battlePhase(&nP1hp, &nP1atk, &nP1def, &nP1spd, &nP1Cr, &nP2hp, &nP2atk, &nP2def, &nP2spd, &nP2Cr);
 }
 
+/*
+    This function is to create any non-positive number into 0.
+*/
 int zero(int x){
     if(x < 0){
         return 0;
@@ -240,8 +246,10 @@ int zero(int x){
     }
 }
 
-
-void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , int* nP2hp, int* nP2atk, int* nP2def, int* nP2spd,int* nP2Cr){
+/*
+    (EDIT)
+*/
+void battlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , int* nP2hp, int* nP2atk, int* nP2def, int* nP2spd,int* nP2Cr){
     srand(time(NULL));
     int ntie = 0;
     int nP1Chrg, nP2Chrg, nP1Blck, nP2Blck;
@@ -288,12 +296,12 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
         /*
         Stat Changes from the Actions
         */
-        if(nP1Action == 2){
+        if(nP1Action == 2 && nP1Chrg == 0){
             *nP1atk *= 2;
             *nP1spd *= 2;
         }
 
-        if(nP2Action == 2){
+        if(nP2Action == 2 && nP2Chrg == 0){
             *nP2atk *= 2;
             *nP2spd *= 2;
         }
@@ -355,25 +363,12 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             nP1Chrg = 1;
             nP2Blck = 1;
             
-            if (nP1Chrg == 1){
-                nP1ChrgEnd = 1;
-            }
-            if (nP2Chrg == 1){
-                nP2ChrgEnd = 1;
-            }
         }
         else if(nP1Action == 3 && nP2Action == 2){
             printf("You blocked the attack.\n");
             printf("The opponent charged for the next turn.\n");
             nP2Chrg = 1;
             nP1Blck = 1;
-
-            if (nP1Chrg == 1){
-                nP1ChrgEnd = 1;
-            }
-            if (nP2Chrg == 1){
-                nP2ChrgEnd = 1;
-            }
         }
         else if(nP1Action == 1 && nP2Action == 3){
                 printf("The opponent blocked the attack.\n");
@@ -515,9 +510,6 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             if (nP1Chrg == 1){
                 nP1ChrgEnd = 1;
             }
-            if (nP2Chrg == 1){
-                nP2ChrgEnd = 1;
-            }   
         }
         else if(nP1Action == 2 && nP2Action == 1){
             printf("The opponent attacked you!\n");
@@ -535,9 +527,6 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             printf("You charged for the next turn.\n");
             nP1Chrg = 1;
             
-            if (nP1Chrg == 1){
-                nP1ChrgEnd = 1;
-            }
             if (nP2Chrg == 1){
                 nP2ChrgEnd = 1;
             }   
@@ -587,7 +576,7 @@ void BattlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
 /*
     This function is for the main menu of the program/game.
 */
-void DisplayMenu(){
+void displayMenu(){
     int nCase;
     int nChecker = 1;
 
@@ -601,11 +590,11 @@ void DisplayMenu(){
 
         switch(nCase){
             case 1:
-                EquipPhase();
+                equipPhase();
                 nChecker = 0;
                 break;
             case 2:
-                DevMode();
+                devMode();
                 nChecker = 0;
                 break;
             case 3:
@@ -626,7 +615,7 @@ void DisplayMenu(){
     to use in C.
 */
 int main(){
-    DisplayMenu();
+    displayMenu();
 
     return 0;
 }
