@@ -26,8 +26,12 @@ Abram Aki R. Bukuhan, DLSU ID# 12313467
 void battlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , int* nP2hp, int* nP2atk, int* nP2def, int* nP2spd,int* nP2Cr);
 
 /*
+    (EDIT)
     This Function changes the values of each stat of each player. It also
     ignores the Equipment Picking Phase and goes straight to the Battle Phase.
+    Precondition:
+    @param
+    @return
 */
 void devMode(){
     int nP1hp, nP1atk, nP1def, nP1spd, nP1Cr;
@@ -63,9 +67,13 @@ void devMode(){
 }
 
 /*
+    (EDIT)
     This function lets the player choose what Weapon and Equipment
     they want to use for the battle. It also lets the opponent randomly
     pick what Weapon and Equipment they will use too.
+    Precondition:
+    @param
+    @return
 */
 void equipPhase(){
 
@@ -135,15 +143,11 @@ void equipPhase(){
         }
     }
     
-
-    
-
     printf("\n\nEquipments: \n\n");
     printf("1: Mythril = DEF +3, SPD +3\n");
     printf("2: Chain Mail = DEF +8, HP +5\n");
     printf("3: Adamantite Armor = DEF +18, HP +10, SPD -4\n");
     printf("4: Bare (No Armor) = SPD +10\n\n");
-    
     
     while(nChecker3 != 0){
         printf("What is your choice? ");
@@ -227,7 +231,6 @@ void equipPhase(){
             break;
     }
 
-
     printf("\n\nYou chose %s and %s.", cP1Weapon, cP1Equip);
     printf("\nThe Opponent chose %s and %s.\n\n", cP2Weapon, cP2Equip);
     printf("Both of you have equipped your weapons of choice. Opening Battle Phase........\n");
@@ -235,7 +238,11 @@ void equipPhase(){
 }
 
 /*
+    (EDIT)
     This function is to create any non-positive number into 0.
+    Precondition:
+    @param
+    @return
 */
 int zero(int x){
     if(x < 0){
@@ -248,6 +255,10 @@ int zero(int x){
 
 /*
     (EDIT)
+    (DESCRIPTION)
+    Precondition:
+    @param
+    @return
 */
 void battlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , int* nP2hp, int* nP2atk, int* nP2def, int* nP2spd,int* nP2Cr){
     srand(time(NULL));
@@ -257,7 +268,6 @@ void battlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
     nP2Chrg = 0;
     nP1Blck = 0;
     nP2Blck = 0;
-    // lmao
 
     while(*nP1hp >= 0 || *nP2hp >= 0 || ntie == 1){
         int nP1Action, nP2Action, nChecker1;
@@ -267,7 +277,6 @@ void battlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
         nChecker1 = 1;
         nP1ChrgEnd = 0;
         nP2ChrgEnd = 0;
-
         nP2Action = rand() % 3 + 1;
 
         while(nChecker1 != 0){
@@ -292,7 +301,6 @@ void battlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             }
         }
         
-
         /*
         Stat Changes from the Actions
         */
@@ -567,14 +575,16 @@ void battlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
             printf("You lose!\n");
             break;
         }
-
     }
-
 }
 
 
 /*
+    (EDIT)
     This function is for the main menu of the program/game.
+    Precondition:
+    @param
+    @return
 */
 void displayMenu(){
     int nCase;
@@ -602,20 +612,23 @@ void displayMenu(){
                 nChecker = 0;
                 break;
             default:
-                printf("Invalid Input.");
+                printf("Invalid Input.\n");
                 break;
         }
 
     }
 }
 
-
 /*
+    (EDIT)
     This function calls the Main Menu function. It is also the required function
     to use in C.
+    Precondition:
+    @param
+    @return
 */
 int main(){
     displayMenu();
-
+    
     return 0;
 }
