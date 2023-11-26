@@ -10,8 +10,8 @@ Abram Aki R. Bukuhan, DLSU ID# 12313467
 /*
     Description:
     Programmed by: Abram Aki R. Bukuhan
-    Last modified: Novemver 23, 2023
-    Version: 1.5
+    Last modified: Novemver 26, 2023
+    Version: 1.6
     [Acknowledgements: ]
 */
 
@@ -33,34 +33,70 @@ void battlePhase(int* nP1hp,int* nP1atk, int* nP1def, int* nP1spd, int* nP1Cr , 
     @param
     @return
 */
+int getPos(int nVal){
+    int nCheck = 0;
+    
+    do{
+        scanf("%d", &nVal);
+        if (nVal > 0){
+            nCheck = 1;
+        }
+        else{
+            printf("Invalid Input. Please Input a positive integer.\n");
+            printf("Input: ");
+        }
+    }
+    while(nCheck != 1);
+
+    return nVal;
+}
+
+/*
+    (EDIT)
+    This Function changes the values of each stat of each player. It also
+    ignores the Equipment Picking Phase and goes straight to the Battle Phase.
+    Precondition:
+    @param
+    @return
+*/
 void devMode(){
-    int nP1hp, nP1atk, nP1def, nP1spd, nP1Cr;
-    int nP2hp, nP2atk, nP2def, nP2spd, nP2Cr;
+    int nP1hp, nP1atk, nP1def, nP1spd, nP1Cr, nP2hp, nP2atk, nP2def, nP2spd, nP2Cr;
+    
+    nP1hp = 0; 
+    nP1atk = 0;
+    nP1def = 0;
+    nP1spd = 0;
+    nP1Cr = 0;
+    nP2hp = 0;
+    nP2atk = 0;
+    nP2def = 0;
+    nP2spd = 0;
+    nP2Cr = 0;
 
     printf("You are now in Dev Mode\nYou are now allowed to manipulate the stats of both the opponent and yourself.\nEntering this mode will skip the equipment picking phase for both players. Have Fun.\n");
     printf("\n For the Critical Rate. Use Percent Form\n");
 
     printf("Your HP: ");
-    scanf("%d", &nP1hp);
+    nP1hp = getPos(nP1hp);
     printf("Your ATK: ");
-    scanf("%d", &nP1atk);
+    nP1atk = getPos(nP1atk);
     printf("Your DEF: ");
-    scanf("%d", &nP1def);
+    nP1def = getPos(nP1def);
     printf("Your SPD: ");
-    scanf("%d", &nP1spd);
+    nP1spd = getPos(nP1spd);
     printf("Your Crit Rate: ");
-    scanf("%d", &nP1Cr);
+    nP1Cr = getPos(nP1Cr);
 
     printf("Opponent's HP: ");
-    scanf("%d", &nP2hp);
+    nP2hp = getPos(nP2hp);
     printf("Opponent's ATK: ");
-    scanf("%d", &nP2atk);
+    nP2atk = getPos(nP2atk);
     printf("Opponent's DEF: ");
-    scanf("%d", &nP2def);
+    nP2def = getPos(nP2def);
     printf("Opponent's SPD: ");
-    scanf("%d", &nP2spd);
+    nP2spd = getPos(nP2spd);
     printf("Opponent's Crit Rate: ");
-    scanf("%d", &nP2Cr);
+    nP2Cr = getPos(nP2Cr);
 
     printf("You have finished setting up your stats. Opening Battle Phase........\n");
     battlePhase(&nP1hp, &nP1atk, &nP1def, &nP1spd, &nP1Cr, &nP2hp, &nP2atk, &nP2def, &nP2spd, &nP2Cr);
