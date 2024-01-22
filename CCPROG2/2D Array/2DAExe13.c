@@ -4,6 +4,7 @@ int main(){
     int n, i, j;
     int multi = 1;
     int inmul;
+    int x;
     int arr[10][10];
 
     do{
