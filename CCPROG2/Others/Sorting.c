@@ -11,7 +11,7 @@ void swap(int *x, int *y){
 void selectionSortAscending1(int arr[], int n){
     int i, j, min;
 
-    for (i = 0; i < n -1; i++){
+    for (i = 0; i < n - 1; i++){
         min = i; // min is the lowest element
 
         for (j = i + 1; j < n; j++){
@@ -42,6 +42,22 @@ void selectionSortAscending2(int arr[], int n){
         arr[min] = temp;
     }
 
+}
+
+void selectionSort2D(int matrix[][4], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols - 1; j++) {
+            // Find the minimum element in the unsorted part
+            int min_index = j;
+            for (int k = j + 1; k < cols; k++) {
+                if (matrix[i][k] < matrix[i][min_index]) {
+                    min_index = k;
+                }
+            }
+            // Swap the found minimum element with the first element
+            swap(&matrix[i][min_index], &matrix[i][j]);
+        }
+    }
 }
 
 // Not Yet Fixed

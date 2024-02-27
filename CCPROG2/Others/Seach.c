@@ -35,6 +35,22 @@ int binarySearch(int key, int A[], int n){
         return -1;
 }
 
+// Function to perform binary search on a sorted 2D array
+int binarySearch2D(int matrix[][4], int rows, int cols, int target) {
+    int low = 0, high = rows * cols - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        int midValue = matrix[mid / cols][mid % cols];
+        if (midValue == target)
+            return mid; // Element found
+        else if (midValue < target)
+            low = mid + 1; // Search in the right half
+        else
+            high = mid - 1; // Search in the left half
+    }
+    return -1; // Element not found
+}
+
 
 int main(){
 
