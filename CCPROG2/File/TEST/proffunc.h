@@ -6,8 +6,8 @@ typedef char string[21];
 typedef struct Profile{
 
     string name;
-    int wonGame;
-    int lostGame;
+    int wonGame[3];
+    int lostGame[3];
 
 }Profile;
 

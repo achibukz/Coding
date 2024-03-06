@@ -13,9 +13,15 @@ void blank(){
 
 
 void printProfile(Profile profile) {
-    printf("Name: %s\n", profile.name);
-    printf("Games Won: %d\n", profile.wonGame);
-    printf("Games Lost: %d\n", profile.lostGame);
+    printf("Profile Name: %s\n", profile.name);
+    printf("  Games Won:\n");
+    printf("     Classic-Easy: %d\n", profile.wonGame[0]);
+    printf("     Classic-Difficult: %d\n", profile.wonGame[1]);
+    printf("     Custom: %d\n", profile.wonGame[2]);
+    printf("  Games Lost:\n");
+    printf("     Classic-Easy: %d\n", profile.lostGame[0]);
+    printf("     Classic-Difficult: %d\n", profile.lostGame[1]);
+    printf("     Custom: %d\n", profile.lostGame[2]);
 }
 
 Profile createProfile(){
@@ -39,8 +45,13 @@ Profile createProfile(){
         }
     }
 
-    profile.wonGame = 0;
-    profile.lostGame = 0;
+    int i;
+
+    for (i = 0; i < 3; i++){
+        profile.wonGame[i] = 0;
+        profile.lostGame[i] = 0;
+    }
+
 
     profileArr[numProf] = profile;
 
@@ -49,7 +60,14 @@ Profile createProfile(){
         printf("Error Opening File.");
     }
 
-    fprintf(file, "%s %d %d\n", profileArr[numProf].name, profileArr[numProf].wonGame, profileArr[numProf].lostGame);
+    fprintf(file, "%s ", profile.name);
+    for (int i = 0; i < 3; i++) {
+        fprintf(file, "%d ", profile.wonGame[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        fprintf(file, "%d ", profile.lostGame[i]);
+    }
+    fprintf(file, "\n");
 
     fclose(file);
 
@@ -76,7 +94,9 @@ void viewStat(string name){
         printf("Error Opening File.");
     }
 
-    while (fscanf(file, "%s %d %d", profile.name, &profile.wonGame, &profile.lostGame) != EOF) {
+    while (fscanf(file, "%s %d %d %d %d %d %d", profile.name, 
+            &profile.wonGame[0], &profile.wonGame[1], &profile.wonGame[2], 
+            &profile.lostGame[0], &profile.lostGame[1], &profile.lostGame[2]) != EOF) {
         if (strcmp(profile.name, name) == 0) {
             found = 1;
             break;
