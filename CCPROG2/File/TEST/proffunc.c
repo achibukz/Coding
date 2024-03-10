@@ -33,7 +33,7 @@ Profile createProfile(){
     blank();
 
     while (check != 1){
-        printf("Profile Name (3-20 characters): ");
+        printf("Profile Name (3-20 characters) (ex. AkiIsClown): ");
         scanf("%s", profile.name);
 
         if (strlen(profile.name) >= 3 && strlen(profile.name) <= 20) {
