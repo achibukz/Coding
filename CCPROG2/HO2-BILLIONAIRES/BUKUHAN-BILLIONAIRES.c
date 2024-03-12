@@ -1,5 +1,5 @@
 /*
-   Encode your LASTNAME, FIRSTNAME: _______________________   SECTION: ___
+   Encode your LASTNAME, FIRSTNAME: Bukuhan, Abram Aki   SECTION: S17A
    
    1. First make sure to rename this file by replacing LASTNAME with your own last name. For example, 
       if your last name is SANTOS, then this file should be named as SANTOS-BILLIONAIRES.c.
@@ -57,10 +57,15 @@
 double Q1_SumNetWorth(int param_number, BType BILLIONAIRE[], int n)
 {
     // Declare your own local variables.
-    
     // You are NOT allowed to call printf() or scanf() inside this function.
+    int total = 0;
+    int i;
+
+    for (i = 0; i < param_number; i++){
+        total += BILLIONAIRE[i].net_worth2023;
+    }
    
-    return -1;  // This return statement is just a place holder.
+    return total;  // This return statement is just a place holder.
                 // You should change the return statement as part of your solution to this exam.  
 }
 
@@ -74,8 +79,25 @@ double Q1_SumNetWorth(int param_number, BType BILLIONAIRE[], int n)
 void Q2_YoungestOldest(BType *ptrYoungest, BType *ptrOldest, BType BILLIONAIRE[], int n)
 {
     // Declare your own local variables.
-    
     // You are NOT allowed to call printf() or scanf() inside this function.   
+
+    int i;
+    int new = BILLIONAIRE[0].age;
+    int old = BILLIONAIRE[0].age;
+
+    for (i = 0; i < n; i++){
+        if (new > BILLIONAIRE[i].age){
+            new = BILLIONAIRE[i].age;
+            *ptrYoungest = BILLIONAIRE[i];
+        }
+    }
+
+    for (i = 0; i < n; i++){
+        if (old < BILLIONAIRE[i].age){
+            old = BILLIONAIRE[i].age;
+            *ptrOldest = BILLIONAIRE[i];
+        }
+    }
   
 }
 
@@ -88,11 +110,20 @@ void Q2_YoungestOldest(BType *ptrYoungest, BType *ptrOldest, BType BILLIONAIRE[]
 */
 int Q3_BillionairesByCountry(BType TEMPLIST[], char *param_country, BType BILLIONAIRE[], int n)
 {
+    int mems = 0;
     // Declare your own local variables.
-    
     // You are NOT allowed to call printf() or scanf() inside this function.
+    int i;
+
+    for (i = 0; i < n; i++){
+        if (strcmp(BILLIONAIRE[i].country, param_country) == 0){
+            TEMPLIST[mems] = BILLIONAIRE[i];
+            mems++;
+        }
+    }
+
    
-    return -1;  // This return statement is just a place holder.
+    return mems;  // This return statement is just a place holder.
                 // You should change the return statement as part of your solution to this exam.  
 }
 
@@ -108,8 +139,15 @@ int Q3_BillionairesByCountry(BType TEMPLIST[], char *param_country, BType BILLIO
 void Q4_ChangeInNetWorth(CType CHANGE[], BType BILLIONAIRE[], int n)
 {
     // Declare your own local variables.
-    
-    // You are NOT allowed to call printf() or scanf() inside this function.   
+    // You are NOT allowed to call printf() or scanf() inside this function. 
+    int i;
+
+    for (i = 0; i < n; i++){
+        CHANGE[i].name = BILLIONAIRE[i].name;
+        CHANGE[i].difference = BILLIONAIRE[i].net_worth2023 - BILLIONAIRE[i].net_worth2022;
+        CHANGE[i].percentage = CHANGE[i].difference / BILLIONAIRE[i].net_worth2022 * 100; 
+    }
+
     
 }
 
@@ -146,28 +184,28 @@ void Q5_StructCopy(BType *ptrDest, BType *ptrSource)
     --------------------------------------------------------------------------------------*/
      
     // #1. copy the first name; you ARE REQUIRED TO USE ->, * and . operators
-    
+    strcpy(ptrDest -> name.first, ptrSource -> name.first);
 
     // #2. copy the last name; you ARE REQUIRED TO USE  ->, * and . operators
-
+    strcpy(ptrDest -> name.last, ptrSource -> name.last);
 
     // #3. copy the net worth in 2023; you ARE REQUIRED TO USE ->, * and . operators
-    
+    ptrDest -> net_worth2023 = ptrSource -> net_worth2023;
     
     // #4. copy the net worth in 2022; you ARE REQUIRED TO USE ->, * and . operators
-
+    ptrDest -> net_worth2022 = ptrSource -> net_worth2022;
 
     // #5. copy the age; you ARE REQUIRED TO USE ->, * and . operators
-
+    ptrDest -> age = ptrSource -> age;
 
     // #6. copy the country; you ARE REQUIRED TO USE ->, * and . operators
-
+    strcpy(ptrDest -> country, ptrSource -> country);
 
     // #7. copy the source of fortune; you ARE REQUIRED TO USE ->, * and . operators
-
+    strcpy(ptrDest -> source, ptrSource -> source);
 
     // #8. copy the industry; you ARE REQUIRED TO USE ->, * and . operators
-
+    strcpy(ptrDest -> industry, ptrSource -> industry);
 
 }
 
