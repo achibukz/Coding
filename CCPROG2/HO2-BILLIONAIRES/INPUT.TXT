@@ -1,0 +1,21 @@
+BERNARD AURNAULT       211    158     74   FRANCE  LVMH                        FASHION-RETAIL
+ELON MUSK              180    219     51   USA     TESLA-SPACEX                TECHNOLOGY
+JEFF BEZOS             114    171     59   USA     AMAZON                      TECHNOLOGY
+LARRY ELLISON          107    106     78   USA     ORACLE                      TECHNOLOGY
+WARREN BUFFET          106    118     92   USA     BERKSHIRE-HATHAWAY          FINANCE
+BILL GATES             104    129     67   USA     MICROSOFT                   TECHNOLOGY
+MICHAEL BLOOMBERG       94.5   82     81   USA     BLOOMBERG-LP                MEDIA
+CARLOS SLIM             93     81.2   83   MEXICO  TELECOM                     TELECOM
+MUKESH AMBANI           83.4   90.7   65   INDIA   DIVERSIFIED                 DIVERSIFIED
+STEVE BALLMER           80.7   91.4   67   USA     MICROSOFT                   TECHNOLOGY
+FRANCOIS MEYERS         80.5   74.8   69   FRANCE  L'OREAL                     FASHION-RETAIL
+LARRY PAGE              79.2  111     50   USA     GOOGLE                      TECHNOLOGY
+AMANCIO ORTEGA          77.3   59.6   87   SPAIN   ZARA                        FASHION-RETAIL
+SERGEY BRIN             76    107     49   USA     GOOGLE                      TECHNOLOGY
+ZHONG SHANSHAN          68     65.7   68   CHINA   BEVERAGE                    FOOD-BEVERAGE
+MARK ZUCKERBERG         64.4   67.3   38   USA     FACEBOOK                    TECHNOLOGY
+CHARLES KOCH            59     60     87   USA     KOCH-INDUSTRIES             DIVERSIFIED
+JULIA KOCH              59     60     60   USA     KOCH-INDUSTRIES             DIVERSIFIED
+JIM WALTON              58.8   66.2   74   USA     WALMART                     FASHION-RETAIL
+ROB WALTON              57.6   65     78   USA     WALMART                     FASHION-RETAIL
+
