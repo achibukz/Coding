@@ -1,0 +1,76 @@
+How many items do you wish to add to the list? Input in any string with a max of 20 characters. You can input up to 5 items.
+Duplicate words are not allowed!
+Input 0 if you wish to end the input process.
+Matching word found! Please input a different word!
+Matching word found! Please input a different word!
+Matching word found! Please input a different word!
+Matching word found! Please input a different word!
+
+The words inputted:
+Mage
+MarksMan
+Tank
+Jungler
+
+---TEST CHECKDUPLICATE(Note: 1 = TRUE, 0 = FALSE)---
+Expected: 1 | Actual : 1
+Expected: 0 | Actual : 0
+Expected: 1 | Actual : 1
+Expected: 0 | Actual : 0
+
+---REVERSING WORDS---
+
+Before Reversing:
+Xerox
+Apple
+Samsung
+Sony
+
+After Reversing:
+xoreX
+elppA
+gnusmaS
+ynoS
+
+---SORTING WORDS---
+
+Words before sorting:
+Watch
+Pencil
+Computer
+Notebook
+Abstract
+
+Words in Ascending order:
+Abstract
+Computer
+Notebook
+Pencil
+Watch
+
+Words in Descending order:
+Watch
+Pencil
+Notebook
+Computer
+Abstract
+
+---ROTATING WORDS---
+
+Word list AFTER rotate left 0 times:
+[Frieren][Stark][Fern][Eisen][Himmel][Heiter][Sein]
+
+Word list AFTER rotate left 2 times:
+[Fern][Eisen][Himmel][Heiter][Sein][Frieren][Stark]
+
+---ROTATING WORDS USING A SIZE LESS THAN THE NUMBER OF ELEMENTS---
+
+Using a size value of 3 (only the first 3 elements will move)
+
+Word list AFTER rotate left 5 times:
+[Himmel][Fern][Eisen][Heiter][Sein][Frieren][Stark]
+
+Using a size value of 5 (only the first 5 elements will move)
+
+Word list AFTER rotate left 6 times:
+[Fern][Eisen][Heiter][Sein][Himmel][Frieren][Stark]

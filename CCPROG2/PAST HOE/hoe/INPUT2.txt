@@ -1,0 +1,10 @@
+5
+Mage
+MarksMan
+Tank
+Jungler
+Jungler
+Tank
+MarksMan
+Mage
+0
