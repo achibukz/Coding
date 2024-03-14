@@ -21,6 +21,7 @@ void printProfile(Profile profile) {
   printf("     Custom: %d\n", profile.lostGame[2]);
 }
 
+// NEED TO MAKE IT UNIQUE LANG AND MAXIMUM OF 10 PROFILES
 Profile createProfile() {
   Profile profileArr[10];
   int numProf = 0;
@@ -57,6 +58,7 @@ Profile createProfile() {
   if (file == NULL) {
     printf("Error Opening File.");
   }
+
 
   fprintf(file, "%s ", profile.name);
   for (int i = 0; i < 3; i++) {
@@ -118,7 +120,7 @@ void viewStat(string name) {
   mainMenu(&profile);
 }
 
-
+// ALPHABETICAL ORDER
 void selProfile(){
     int found = 0;
     Profile profile;
@@ -232,6 +234,7 @@ void profile_mainMenu() {
     // printf("Who do you want to delete? ");
     // scanf("%s", name);
     // delProfile(name);
+    // IF NAME EXISTS, ASK CONFIRMATION
     break;
   default:
     break;
