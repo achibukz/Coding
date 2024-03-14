@@ -14,6 +14,8 @@ Acknowledgments : < list of references used in the making of this project > */
 #include <string.h>
 #include <time.h>
 
+//hi
+
 struct CoordTag {
   int xCoord;
   int yCoord;
