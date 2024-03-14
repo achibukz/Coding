@@ -78,7 +78,7 @@ Profile createProfile() {
   numProf++;
 
 
-    mainMenu(profile);
+    mainMenu(&profile);
     return profile;
 }
 
@@ -115,7 +115,7 @@ void viewStat(string name) {
     printf("Profile not found.\n");
   }
 
-  mainMenu(profile);
+  mainMenu(&profile);
 }
 
 
@@ -147,7 +147,7 @@ void selProfile(){
         blank();
         printf("Profile found.\n");
         blank();
-        mainMenu(profile);
+        mainMenu(&profile);
     } 
     else {
         blank();
@@ -157,45 +157,57 @@ void selProfile(){
 
 }
 
-void profileChanger(Profile *profile, int type, int diff){
-    if (type == 1 && diff == 1){
+void findName(FILE *file, const char *target) {
+    char buffer[256]; 
+    long startPos; 
+
+    rewind(file);
+
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        if (strstr(buffer, target) != NULL) {
+            startPos = ftell(file) - strlen(buffer);
+            break;
+        }
+    }
+
+    fseek(file, startPos - 1, SEEK_SET);
+}
+
+
+void profileChanger(Profile *profile, int type, int diff, int win){
+
+    if (type == 1 && diff == 1 && win == 1){
         profile->wonGame[0]++;
     }
-    else if (type == 1 && diff == 2){
+    else if (type == 1 && diff == 2 && win == 1){
         profile->wonGame[1]++;
     }
-    else if (type == 2){
+    else if (type == 2 && win == 1){
         profile->wonGame[2]++;
     }
-    else if (type == 1 && diff == 1){
+    else if (type == 1 && diff == 1 && win == 0){
         profile->lostGame[0]++;
     }
-    else if (type == 1 && diff == 2){
+    else if (type == 1 && diff == 2 && win == 0){
         profile->lostGame[1]++;
     }
-    else if (type == 1){
+    else if (type == 1 && win == 0){
         profile->lostGame[2]++;
     }
 
 
-  FILE *file = fopen("prof.txt", "a");
+  FILE *file = fopen("prof.txt", "r+");
   if (file == NULL) {
     printf("Error Opening File.");
   }
 
-  fprintf(file, "%s ", profile -> name);
-  for (int i = 0; i < 3; i++) {
-    fprintf(file, "%d ", profile -> wonGame[i]);
-  }
-  for (int i = 0; i < 3; i++) {
-    fprintf(file, "%d ", profile -> lostGame[i]);
-  }
-  fprintf(file, "\n");
+  findName(file, profile->name);
+  fprintf(file, "%s %d %d %d %d %d %d", profile->name, 
+          profile->wonGame[0], profile->wonGame[1], profile->wonGame[2],
+          profile->lostGame[0], profile->lostGame[1], profile->lostGame[2]);
 
   fclose(file);
-
   blank();
-
 }
 
 void profile_mainMenu() {
@@ -216,7 +228,10 @@ void profile_mainMenu() {
     selProfile();
     break;
   case 3:
-    // delProfile();
+    // string name;
+    // printf("Who do you want to delete? ");
+    // scanf("%s", name);
+    // delProfile(name);
     break;
   default:
     break;

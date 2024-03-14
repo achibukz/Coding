@@ -8,16 +8,22 @@ typedef struct Profile {
   string name;
   int wonGame[3];
   int lostGame[3];
+  // Board board;
 
 } Profile;
 
 /*
-typedef struct Game{
+  typedef struct Board{
 
-    int arr[5][5];
+    int row;
+    int column;
+    
 
-};
+} Board;
+
 */
+
+
 
 void blank();
 void printProfile(Profile profile);

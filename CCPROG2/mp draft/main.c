@@ -621,7 +621,7 @@ void startGame(Profile *profile) {
     printBoard(board, boardRows, boardCols, 1);
   }
 
-  profileChanger(*profile, gameType, difficulty);
+  profileChanger(profile, gameType, difficulty, win);
 }
 
 /*
@@ -650,7 +650,7 @@ void mainMenu(Profile *profile) {
   // && userInput != 5){
   switch (userInput) {
   case 1:
-    startGame();
+    startGame(&prof);
     break;
   case 2:
     printf("Enter the file name to save the level (without .txt extension): ");

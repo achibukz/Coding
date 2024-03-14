@@ -1,9 +1,2 @@
-Achi 0 0 0 0 0 0 
-
-Ryan 0 0 0 0 0 0 
-Mikhos 0 0 0 0 0 0 
-Phillip 0 0 0 0 0 0 
-Patrick 0 0 0 0 0 0 
-Jared 0 0 0 0 0 0 
-Richard 0 0 0 0 0 0 
-Nio 0 0 0 0 0 0 
+Achi 0 0 0 5 1 0 
+Ryan 0 0 0 2 0 0 
