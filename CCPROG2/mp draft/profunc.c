@@ -21,11 +21,74 @@ void printProfile(Profile profile) {
   printf("     Custom: %d\n", profile.lostGame[2]);
 }
 
+void arrProf(string names[], int *numNames) {
+    FILE *file = fopen("prof.txt", "r");
+    if (file == NULL) {
+        printf("Error opening file.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    *numNames = 0;
+    while (*numNames < 20 && fscanf(file, "%20s", names[*numNames]) != EOF) {
+        (*numNames)++;
+        while (fgetc(file) != '\n' && !feof(file)); 
+    }
+
+    fclose(file);
+}
+
+void selSort(string arr[], int n) {
+    int i, j, min;
+    string temp;
+    for (i = 0; i < n - 1; i++) {
+        min = i;
+        for (j = i + 1; j < n; j++) {
+            if (strcmp(arr[j], arr[min]) < 0) {
+                min = j;
+            }
+        }
+        if (min != i) {
+            strcpy(temp, arr[i]);
+            strcpy(arr[i], arr[min]);
+            strcpy(arr[min], temp);
+        }
+    }
+}
+
+int profFinder(string arr[], string name, int n){
+  int found = 1;
+  int i = 0;
+  int end = 0;
+
+  
+
+  while (end != 1){
+    
+    if (strcmp(arr[i], name) == 0){
+      found = 0;
+      end = 1;
+    }
+    i++;
+
+    if (i == 20){
+      end = 1;
+    }
+  }
+
+  return found;
+}
+
 // NEED TO MAKE IT UNIQUE LANG AND MAXIMUM OF 10 PROFILES
 Profile createProfile() {
-  Profile profileArr[10];
+  Profile profileArr[20];
   int numProf = 0;
   int check = 0;
+  int numNames;
+  string arr[20];
+  int nCheck = 0;
+
+  arrProf(arr, &numNames);
+  selSort(arr, numNames);
 
   Profile profile;
   blank();
@@ -34,12 +97,21 @@ Profile createProfile() {
     printf("Profile Name (3-20 characters): ");
     scanf("%s", profile.name);
 
-    if (strlen(profile.name) >= 3 && strlen(profile.name) <= 20) {
+    nCheck = profFinder(arr, profile.name, numNames);
+    printf("%d\n", nCheck);
+
+    if (strlen(profile.name) >= 3 && strlen(profile.name) <= 20 && nCheck == 1) {
       printf("Valid Profile Name. Thank you!\n");
       check = 1; // Exit the loop if the name is valid
-    } else {
+    } 
+    else if (strlen(profile.name) < 3 && strlen(profile.name) > 20){
       printf("Invalid name length. Please enter a name with 3 to 20 "
              "characters.\n");
+      while (getchar() != '\n')
+        ; // Clear input buffer
+    }
+    else if (nCheck == 0){
+      printf("Name is already used. Please enter a unique name.\n");
       while (getchar() != '\n')
         ; // Clear input buffer
     }
@@ -122,12 +194,39 @@ void viewStat(string name) {
 
 // ALPHABETICAL ORDER
 void selProfile(){
-    int found = 0;
     Profile profile;
-    string name;
+    int name;
+    string arr[20];
+    int numNames, i;
+    int nCheck = 0;
 
-    printf("What profile will you use? ");
-    scanf("%s", name);
+    arrProf(arr, &numNames);
+    selSort(arr, numNames);
+
+    printf("Select Your Profile: \n");
+    for (i = 0; i < numNames; i++) {
+        printf("%d: %s\n",i + 1, arr[i]);
+    }
+    
+
+  while (nCheck != 1){
+    printf("What profile will you use? (Select The Number) ");
+    scanf("%d", &name);
+
+    if (1 <= name && name <= numNames - 1) {
+        blank();
+        printf("Profile found.\n");
+        blank();
+        nCheck = 1;
+    } 
+    else {
+        blank();
+        printf("Profile not found.\n");
+        printf("Please Try Again.\n");
+    }
+  }
+
+  name -= 1;
 
     FILE *file = fopen("prof.txt", "r");
     if (file == NULL) {
@@ -137,29 +236,20 @@ void selProfile(){
     while (fscanf(file, "%s %d %d %d %d %d %d", profile.name, &profile.wonGame[0],
                 &profile.wonGame[1], &profile.wonGame[2], &profile.lostGame[0],
                 &profile.lostGame[1], &profile.lostGame[2]) != EOF) {
-        if (strcmp(profile.name, name) == 0) {
-            found = 1;
+        if (strcmp(profile.name, arr[name]) == 0) {
             break;
         }
     }
 
     fclose(file);
 
-    if (found) {
-        blank();
-        printf("Profile found.\n");
-        blank();
-        mainMenu(&profile);
-    } 
-    else {
-        blank();
-        printf("Profile not found.\n");
-    }
+    mainMenu(&profile);
+    
 
 
 }
 
-void findName(FILE *file, const char *target) {
+void cursorStart(FILE *file, string target) {
     char buffer[256]; 
     long startPos; 
 
@@ -203,7 +293,7 @@ void profileChanger(Profile *profile, int type, int diff, int win){
     printf("Error Opening File.");
   }
 
-  findName(file, profile->name);
+  cursorStart(file, profile->name);
   fprintf(file, "%s %d %d %d %d %d %d", profile->name, 
           profile->wonGame[0], profile->wonGame[1], profile->wonGame[2],
           profile->lostGame[0], profile->lostGame[1], profile->lostGame[2]);
@@ -211,6 +301,7 @@ void profileChanger(Profile *profile, int type, int diff, int win){
   fclose(file);
   blank();
 }
+
 
 void profile_mainMenu() {
 
