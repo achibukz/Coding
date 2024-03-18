@@ -4,6 +4,8 @@
         "time.h": "c",
         "stdlib.h": "c",
         "billionaires.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "string.h": "c",
+        "profunc.h": "c"
     }
 }

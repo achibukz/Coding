@@ -4,6 +4,7 @@
 #include <string.h>
 #include <time.h>
 
+
 void blank() {
 
   printf("---------------------------------------------------\n");
@@ -213,7 +214,7 @@ void selProfile(){
     printf("What profile will you use? (Select The Number) ");
     scanf("%d", &name);
 
-    if (1 <= name && name <= numNames - 1) {
+    if (1 <= name && name <= numNames) {
         blank();
         printf("Profile found.\n");
         blank();
@@ -302,30 +303,126 @@ void profileChanger(Profile *profile, int type, int diff, int win){
   blank();
 }
 
+void delProfile(string name) {
+    Profile arr[10];
+    int i = 0;
+    int found = 0;
+
+    FILE *file = fopen("prof.txt", "r");
+    if (file == NULL) {
+        printf("Error opening file.\n");
+        return;
+    }
+
+    char tempFileName[L_tmpnam];
+    tmpnam(tempFileName);
+
+    FILE *tempFile = fopen(tempFileName, "w");
+    if (tempFile == NULL) {
+        printf("Error creating temporary file.\n");
+        fclose(file);
+        return;
+    }
+
+    while (fscanf(file, "%s %d %d %d %d %d %d", arr[i].name, &arr[i].wonGame[0],
+                &arr[i].wonGame[1], &arr[i].wonGame[2], &arr[i].lostGame[0],
+                &arr[i].lostGame[1], &arr[i].lostGame[2]) != EOF) {
+        if (strcmp(arr[i].name, name) != 0) {
+            fprintf(tempFile, "%s %d %d %d %d %d %d\n", arr[i].name, arr[i].wonGame[0],
+                    arr[i].wonGame[1], arr[i].wonGame[2], arr[i].lostGame[0],
+                    arr[i].lostGame[1], arr[i].lostGame[2]);
+        } else {
+            found = 1;
+        }
+        i++;
+    }
+
+    fclose(file);
+    fclose(tempFile);
+
+    if (found == 0) {
+        printf("Profile not found.\n");
+        return;
+    }
+
+    if (remove("prof.txt") != 0) {
+        printf("Error removing file.\n");
+        return;
+    }
+    if (rename(tempFileName, "prof.txt") != 0) {
+        printf("Error renaming file.\n");
+        return;
+    }
+
+    printf("Profile deleted successfully.\n");
+
+    profile_mainMenu();
+}
+
+
 
 void profile_mainMenu() {
 
   int userInput;
+  string arr[10];
+  int numNames;
+  int check;
+  char con;
+  string name;
+  int i;
 
+  arrProf(arr, &numNames);
+  selSort(arr, numNames);
+
+    
+  blank();
   printf("1: Create Profile\n");
   printf("2: Select Existing Profile\n");
   printf("3: Delete Existing Profile\n");
   printf("What is your Choice: ");
   scanf("%d", &userInput);
+  getchar();
 
   switch (userInput) {
   case 1:
-    createProfile();
-    break;
+    if (numNames == 10){
+      printf("The Program has reached the Maximum of 10 Profiles.\n");
+      printf("Please select an existing profile or Delete a Profile\n");
+      profile_mainMenu();
+    }
+    else{
+      createProfile();
+      break;
+    }
+    
   case 2:
     selProfile();
     break;
   case 3:
-    // string name;
-    // printf("Who do you want to delete? ");
-    // scanf("%s", name);
-    // delProfile(name);
-    // IF NAME EXISTS, ASK CONFIRMATION
+    printf("Select Your Profile: \n");
+    for (i = 0; i < numNames; i++) {
+        printf("%d: %s\n",i + 1, arr[i]);
+    }
+    blank();
+    printf("Who do you want to delete (Type the Name): ");
+    scanf("%s", name);
+    
+    check = profFinder(arr, name, numNames);
+
+    if(check == 0){
+      printf("Profile is Found\n");
+      printf("Are you sure? (Y/N): " );
+      scanf(" %c", &con);
+
+      if (con == 'Y' || con == 'y'){
+        blank();
+        delProfile(name);
+      }
+      else{
+        blank();
+        profile_mainMenu();
+      }
+    }
     break;
   default:
     break;
