@@ -355,7 +355,8 @@ int writeCustomLevel(char fileName[]) {
   while (!levelIsValid) {
     while (makingLevel) {
       userChoosing = 1;
-      iClear(0, 0, 50, 50);
+      //iClear(0, 0, 50, 50);
+      system("cls");
       printBoard(board, boardRows, boardCols, 0);
       printf("Press an arrow key to move.\n");
       printf("Press M to toggle a mine in the board.\n");
@@ -522,7 +523,8 @@ void startGame(Profile *profile) {
     userChoosing = 1;
     revealCount = 0;
 
-    iClear(0, 0, 50, 50);
+    //iClear(0, 0, 50, 50);
+    system("cls");
     printBoard(board, boardRows, boardCols, 1);
     printf("Press an arrow key to move.\n");
     printf("Press I to inspect, F to flag, Q to quit.\n");
@@ -606,7 +608,8 @@ void startGame(Profile *profile) {
     }
   }
 
-  iClear(0, 0, 50, 50);
+  //iClear(0, 0, 50, 50);
+  system("cls");
   printf("Game over!\n");
   if (userChar != 'Q') {
     printBoard(board, boardRows, boardCols, 0);
