@@ -4,7 +4,6 @@
 #include <string.h>
 #include <time.h>
 
-
 void blank() {
 
   printf("---------------------------------------------------\n");
@@ -60,9 +59,7 @@ int profFinder(string arr[], string name, int n){
   int found = 1;
   int i = 0;
   int end = 0;
-
   
-
   while (end != 1){
     
     if (strcmp(arr[i], name) == 0){
@@ -79,7 +76,6 @@ int profFinder(string arr[], string name, int n){
   return found;
 }
 
-// NEED TO MAKE IT UNIQUE LANG AND MAXIMUM OF 10 PROFILES
 Profile createProfile() {
   Profile profileArr[20];
   int numProf = 0;
@@ -131,7 +127,6 @@ Profile createProfile() {
   if (file == NULL) {
     printf("Error Opening File.");
   }
-
 
   fprintf(file, "%s ", profile.name);
   for (int i = 0; i < 3; i++) {
@@ -209,7 +204,6 @@ void selProfile(){
         printf("%d: %s\n",i + 1, arr[i]);
     }
     
-
   while (nCheck != 1){
     printf("What profile will you use? (Select The Number) ");
     scanf("%d", &name);
@@ -265,7 +259,6 @@ void cursorStart(FILE *file, string target) {
 
     fseek(file, startPos - 1, SEEK_SET);
 }
-
 
 void profileChanger(Profile *profile, int type, int diff, int win){
 
@@ -358,8 +351,6 @@ void delProfile(string name) {
 
     profile_mainMenu();
 }
-
-
 
 void profile_mainMenu() {
 

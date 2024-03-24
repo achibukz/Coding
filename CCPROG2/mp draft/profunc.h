@@ -34,6 +34,7 @@ void viewStat(string name);
 void cursorStart(FILE *file, string target);
 void profileChanger(Profile *profile, int type, int diff, int win);
 void delProfile(string name);
+void mainMenu(Profile *profile);
 void profile_mainMenu();
 
 

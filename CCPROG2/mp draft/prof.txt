@@ -1,7 +1,4 @@
-Achi 0 0 0 5 1 0
+Achi 0 0 0 12 1 0
 Esther 0 0 0 0 0 0
-Mariah 0 0 0 0 1 0
 Enzo 0 0 0 0 0 0
-Hello 0 0 0 0 0 0
-Jack 0 0 0 0 0 0
-Damn 0 0 0 0 0 0
+Deez 0 0 0 1 0 0
