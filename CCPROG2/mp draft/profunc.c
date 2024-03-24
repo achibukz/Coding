@@ -166,10 +166,10 @@ void viewStat(string name) {
 
   while (fscanf(file, "%s %d %d %d %d %d %d", profile.name, &profile.wonGame[0],
                 &profile.wonGame[1], &profile.wonGame[2], &profile.lostGame[0],
-                &profile.lostGame[1], &profile.lostGame[2]) != EOF) {
+                &profile.lostGame[1], &profile.lostGame[2]) != EOF && found != 1) {
     if (strcmp(profile.name, name) == 0) {
       found = 1;
-      break;
+      // break;
     }
   }
 
@@ -222,6 +222,7 @@ void selProfile(){
   }
 
   name -= 1;
+  nCheck = 0;
 
     FILE *file = fopen("prof.txt", "r");
     if (file == NULL) {
@@ -230,9 +231,10 @@ void selProfile(){
 
     while (fscanf(file, "%s %d %d %d %d %d %d", profile.name, &profile.wonGame[0],
                 &profile.wonGame[1], &profile.wonGame[2], &profile.lostGame[0],
-                &profile.lostGame[1], &profile.lostGame[2]) != EOF) {
+                &profile.lostGame[1], &profile.lostGame[2]) != EOF && nCheck != 1) {
         if (strcmp(profile.name, arr[name]) == 0) {
-            break;
+            nCheck = 1;
+            // break;
         }
     }
 
@@ -247,13 +249,15 @@ void selProfile(){
 void cursorStart(FILE *file, string target) {
     char buffer[256]; 
     long startPos; 
+    int check = 0;
 
     rewind(file);
 
-    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+    while (fgets(buffer, sizeof(buffer), file) != NULL && check != 1) {
         if (strstr(buffer, target) != NULL) {
             startPos = ftell(file) - strlen(buffer);
-            break;
+            check = 1;
+            // break;
         }
     }
 
