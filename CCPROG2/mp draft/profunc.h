@@ -12,16 +12,22 @@ typedef struct Profile {
 
 } Profile;
 
-/*
-  typedef struct Board{
+struct CoordTag {
+  int xCoord;
+  int yCoord;
+};
 
-    int row;
-    int column;
-    
+struct CellState {
+  int isRevealed;
+  int isMine;
+  int isFlagged;
+};
 
-} Board;
-
-*/
+struct Cell {
+  struct CoordTag position;
+  struct CellState state;
+  int adjacentMines;
+};
 
 void blank();
 void printProfile(Profile profile);

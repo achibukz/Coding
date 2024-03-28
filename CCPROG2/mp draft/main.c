@@ -16,23 +16,6 @@ Acknowledgments : < list of references used in the making of this project > */
 
 //hi
 
-struct CoordTag {
-  int xCoord;
-  int yCoord;
-};
-
-struct CellState {
-  int isRevealed;
-  int isMine;
-  int isFlagged;
-};
-
-struct Cell {
-  struct CoordTag position;
-  struct CellState state;
-  int adjacentMines;
-};
-
 /*
   nRandomizer() - Generates a random integer within a given range
 
@@ -620,7 +603,7 @@ void startGame(Profile *profile) {
       printf("You lose!\n");
     }
   } else {
-    printf("You quit the game!");
+    printf("You quit the game!\n");
     printBoard(board, boardRows, boardCols, 1);
   }
 

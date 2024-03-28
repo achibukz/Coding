@@ -4,11 +4,21 @@
 #include <string.h>
 #include <time.h>
 
+/*
+  blank() - Creates a Horizontal Dash for Display.
+ */
 void blank() {
 
   printf("---------------------------------------------------\n");
 }
 
+/*
+  printProfile()
+
+  This function displayes the Details of the Player.
+
+  @param: profile - A struct Profile of the Player
+ */
 void printProfile(Profile profile) {
   printf("Profile Name: %s\n", profile.name);
   printf("  Games Won:\n");
@@ -21,25 +31,65 @@ void printProfile(Profile profile) {
   printf("     Custom: %d\n", profile.lostGame[2]);
 }
 
-void arrProf(string names[], int *numNames) {
-    FILE *file = fopen("prof.txt", "r");
+/*
+  arrProf()
+
+  This function stores all the Profile Names in one Array and updates a Variable
+  that stores how many Profiles do we have.
+
+  @param: names[] - A string array to store all the Profile Names
+  @param: *numNames - A integer pointer that stores how many players do we have
+ */
+void arrProf(string *names[], int *numNames) {
+    FILE *file = fopen("prof.txt", "a+");
     if (file == NULL) {
-        printf("Error opening file.\n");
-        exit(EXIT_FAILURE);
+    printf("Error Opening File.");
     }
 
+    // Initialize the Number of Names to 0
     *numNames = 0;
-    while (*numNames < 20 && fscanf(file, "%20s", names[*numNames]) != EOF) {
+    while (*numNames < 30 && fscanf(file, "%20s", names[*numNames]) != EOF) {
         (*numNames)++;
         while (fgetc(file) != '\n' && !feof(file)); 
     }
 
+    int i;
+
+    int num = *numNames / 4;
+    int cnt = 0;
+    string temp[num];
+
+    for (i = 0; i < *numNames; i++){
+      if(i % 4 == 0){
+        strcpy(temp[cnt], names[i]);
+        cnt++;
+      }
+    }
+
+    *numNames /= 4;
+    names = temp;
+
+    for(i = 0; i < *numNames; i++){
+      printf("%s\n", names[i]);
+    }
+
     fclose(file);
+
+    selSort(&names, *numNames);
+
 }
 
-void selSort(string arr[], int n) {
+void selSort(string *arr[], int n) {
     int i, j, min;
     string temp;
+
+
+  for(i = 0; i < n; i++){
+      printf("%s\n", arr[i]);
+    }
+
+
+
     for (i = 0; i < n - 1; i++) {
         min = i;
         for (j = i + 1; j < n; j++) {
@@ -52,6 +102,10 @@ void selSort(string arr[], int n) {
             strcpy(arr[i], arr[min]);
             strcpy(arr[min], temp);
         }
+    }
+
+    for(i = 0; i < n; i++){
+      printf("%s\n", arr[i]);
     }
 }
 
@@ -84,8 +138,7 @@ Profile createProfile() {
   string arr[20];
   int nCheck = 0;
 
-  arrProf(arr, &numNames);
-  selSort(arr, numNames);
+  arrProf(&arr, &numNames);
 
   Profile profile;
   blank();
@@ -137,6 +190,25 @@ Profile createProfile() {
   }
   fprintf(file, "\n");
 
+  fprintf(file, "%s's Board 1: \n", profile.name);
+  for (i = 0; i < 18; i++){
+    fprintf(file, "\n");
+  }
+
+
+  fprintf(file, "%s's Board 2: \n", profile.name);
+  for (i = 0; i < 18; i++){
+    fprintf(file, "\n");
+  }
+
+  fprintf(file, "%s's Board 3: \n", profile.name);
+  for (i = 0; i < 18; i++){
+    fprintf(file, "\n");
+  }
+
+  fprintf(file, "\n");
+
+
   fclose(file);
 
   blank();
@@ -166,10 +238,10 @@ void viewStat(string name) {
 
   while (fscanf(file, "%s %d %d %d %d %d %d", profile.name, &profile.wonGame[0],
                 &profile.wonGame[1], &profile.wonGame[2], &profile.lostGame[0],
-                &profile.lostGame[1], &profile.lostGame[2]) != EOF && found != 1) {
+                &profile.lostGame[1], &profile.lostGame[2]) != EOF) {
     if (strcmp(profile.name, name) == 0) {
       found = 1;
-      // break;
+      break;
     }
   }
 
@@ -196,8 +268,13 @@ void selProfile(){
     int numNames, i;
     int nCheck = 0;
 
-    arrProf(arr, &numNames);
-    selSort(arr, numNames);
+    arrProf(&arr, &numNames);
+
+    printf("Why?\n");
+
+    for (i = 0; i < 30; i++){
+      printf("%s\n", arr[i]);
+    }
 
     printf("Select Your Profile: \n");
     for (i = 0; i < numNames; i++) {
@@ -224,6 +301,7 @@ void selProfile(){
   name -= 1;
   nCheck = 0;
 
+
     FILE *file = fopen("prof.txt", "r");
     if (file == NULL) {
         printf("Error Opening File.");
@@ -231,10 +309,9 @@ void selProfile(){
 
     while (fscanf(file, "%s %d %d %d %d %d %d", profile.name, &profile.wonGame[0],
                 &profile.wonGame[1], &profile.wonGame[2], &profile.lostGame[0],
-                &profile.lostGame[1], &profile.lostGame[2]) != EOF && nCheck != 1) {
+                &profile.lostGame[1], &profile.lostGame[2]) != EOF) {
         if (strcmp(profile.name, arr[name]) == 0) {
-            nCheck = 1;
-            // break;
+            break;
         }
     }
 
@@ -249,15 +326,13 @@ void selProfile(){
 void cursorStart(FILE *file, string target) {
     char buffer[256]; 
     long startPos; 
-    int check = 0;
 
     rewind(file);
 
-    while (fgets(buffer, sizeof(buffer), file) != NULL && check != 1) {
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
         if (strstr(buffer, target) != NULL) {
             startPos = ftell(file) - strlen(buffer);
-            check = 1;
-            // break;
+            break;
         }
     }
 
@@ -356,6 +431,26 @@ void delProfile(string name) {
     profile_mainMenu();
 }
 
+/*
+void printBoardTex(struct Cell board[][15], int boardRows, int boardColumns,
+                int fog){
+
+  FILE *file = fopen("prof.txt", "r+");
+  if (file == NULL) {
+    printf("Error Opening File.");
+  }
+
+
+
+
+
+
+
+
+  fclose(file);                
+}
+*/
+
 void profile_mainMenu() {
 
   int userInput;
@@ -366,9 +461,7 @@ void profile_mainMenu() {
   string name;
   int i;
 
-  arrProf(arr, &numNames);
-  selSort(arr, numNames);
-
+  arrProf(&arr, &numNames);
     
   blank();
   printf("1: Create Profile\n");
